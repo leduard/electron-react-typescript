@@ -16,6 +16,7 @@ function createWindow() {
     webPreferences: {
       nodeIntegration: true,
     },
+    show: false,
   });
 
   if (process.env.NODE_ENV === 'development') {
@@ -33,6 +34,8 @@ function createWindow() {
   mainWindow.on('closed', () => {
     mainWindow = null;
   });
+
+  mainWindow.once('ready-to-show', () => mainWindow?.show());
 }
 
 app
@@ -48,4 +51,5 @@ app
         .catch((err) => console.log('An error occurred: ', err));
     }
   });
+
 app.allowRendererProcessReuse = true;
